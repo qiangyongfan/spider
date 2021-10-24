@@ -124,7 +124,7 @@ for addr_name in addr_names :
     res_elements = get_data(addr_name)
     get_commu_info(res_elements)
 
-#     # 获取二手房的信息
+    # 获取二手房的信息
 #     res_df = get_house_info(res_elements)
 #     res.append(res_df)
 # result = pd.concat(res,axis=0)
