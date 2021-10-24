@@ -22,7 +22,7 @@ def get_data(addr_name):
     (KHTML, like Gecko) Chrome/14.0.835.163 Safari/535.1'}
     url = f'https://sh.lianjia.com/ershoufang/rs{addr_name}/'
     res = requests.get(url, headers=headers)
-    # print(res.text)
+    print(res.text)
     res_elements = etree.HTML(res.text)
     return res_elements
 
@@ -33,6 +33,18 @@ def get_house_num(res_elements):
     ss = etree.tostring(table[0], encoding='utf-8').decode()
     num =re.findall('<span>(.+?)</span>.*',ss)[0].strip()
     return num
+
+
+def get_commu_info(res_elements):
+    """获取小区相关的情况"""
+
+    # 所属板块是动态的页面, 这种写法搞不定
+    region_name  = res_elements.xpath('//span[@class="agentCardResblockSubTitle"]/text()')
+    print(region_name)
+
+
+
+
 
 def get_house_info(res_elements):
     """获取在售的房子信息, 包括所属板块,几室几厅,面积, 售价"""
@@ -104,15 +116,17 @@ def get_house_info(res_elements):
     return res
 
 
-addr_names = ['金领国际','龚路新村','龚华公寓','龚路新城']
+# addr_names = ['金领国际','龚路新村','龚华公寓','龚路新城']
+addr_names = ['龚路新村']
 res = []
 for addr_name in addr_names :
     # 获取网页
     res_elements = get_data(addr_name)
+    get_commu_info(res_elements)
 
-    # 获取二手房的信息
-    res_df = get_house_info(res_elements)
-    res.append(res_df)
-result = pd.concat(res,axis=0)
-print(result)
+#     # 获取二手房的信息
+#     res_df = get_house_info(res_elements)
+#     res.append(res_df)
+# result = pd.concat(res,axis=0)
+# print(result)
 
