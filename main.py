@@ -18,6 +18,8 @@ pd.set_option('colheader_justify', 'left')
 import warnings
 warnings.filterwarnings('ignore')
 
+
+
 def get_data(url,headers):
     """获取指定url的数据, 并将结果新增city字段
        url:数据地址

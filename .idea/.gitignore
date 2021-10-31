@@ -1,3 +1,6 @@
 # 默认忽略的文件
 /shelf/
 /workspace.xml
+
+# 忽略.idea 的文件夹下的问价 
+/Users/mac/jupyter/爬虫/链家/.ipynb_checkpoints
