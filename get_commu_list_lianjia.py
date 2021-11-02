@@ -12,13 +12,12 @@ headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 
 # 链家的爬小区列表, 全上海总共趴了三千多个小区, 因为在一百多页以后, 每页返回的数据是一样的
 # https://sh.lianjia.com/xiaoqu/5011000012986/    这个网址可以查看小区的历史成交
 
-def get_commu_ls_page(num):
+def get_commu_ls_page(url):
     """获取小区列表"""
-
+    print(url)
     res = pd.DataFrame()
-    # 构建url
-    url = f'https://sh.lianjia.com/xiaoqu/pg{num}/'
-
+    # 获取页码
+    num = re.findall('.+pn(\d+)/',url)[0]
     # 获取网页文本
     res_elements, _ = get_data(url, headers)
     table = res_elements.xpath('//li[@class="clear xiaoquListItem"]')
@@ -52,7 +51,8 @@ def main():
         # if num>=2:
         #     break
         try:
-            df = get_commu_ls_page(num)
+            url = f'https://sh.lianjia.com/xiaoqu/pg{num}/'
+            df = get_commu_ls_page(url)
             df.to_csv(f'./result/第{num}页结果.csv',index=False)
         except:
             print(f'第{num}页出错了'.center(60,'!'))

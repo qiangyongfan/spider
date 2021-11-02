@@ -18,6 +18,8 @@ pd.set_option('colheader_justify', 'left')
 import warnings
 warnings.filterwarnings('ignore')
 
+headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 \
+    (KHTML, like Gecko) Chrome/14.0.835.163 Safari/535.1'}
 
 
 def get_data(url,headers):
@@ -170,8 +172,6 @@ if __name__=="__main__":
 
     res = joblib.load('./data/安居客浦东小区名称列表')
     addr_names = list(set(reduce(operator.add, res)))
-    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 \
-    (KHTML, like Gecko) Chrome/14.0.835.163 Safari/535.1'}
     columns = ['区名','板块名称','小区名称','小区均价', '正在出售套数','近30天带看数','近90天成交套数','title', '房屋信息','室厅', '面积', '卧室朝向', '装修', '楼层', '年份', '类型', '总价', '单价']
     df = pd.DataFrame(columns=columns)
 
